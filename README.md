@@ -1,8 +1,6 @@
-# Raku Distribution Template
+# Test::Grammar for Raku
 
-Template for Raku modules, classes, roles, to be distributed as a
-single package in the ecosystem. Fill this README with your
-instructions.
+Unit testing for grammars. Because testing is important.
 
 ## Installing
 
