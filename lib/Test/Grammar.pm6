@@ -17,9 +17,11 @@ use MONKEY-SEE-NO-EVAL;
 
 unit module Test::Grammar;
 
-sub parses-ok( $match;
+sub parses-ok( Grammar $grammar,
+               $token-or-rule,
+               Str $str,
                $message = "👍" ) is export {
 
-    isa-ok $match, Match, "Correct type $message";
-    ok so $match, "👍 $message";
+    ok $grammar.subparse($str, :rule($token-or-rule)), $message;
+
 }

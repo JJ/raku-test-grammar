@@ -5,17 +5,12 @@ use lib <. t/>;
 
 use Test-Grammar;
 
-class Test-Grammar::Action {
-    method num( $/ ) { parses-ok $/, "«num» parses" }
-}
-
 subtest {
-    constant @parsed = <3 33 d3 dd>;
-    plan @parsed.elems / 2;
+    constant @parsed = <3 33 3d>;
 
     for @parsed {
-        Test-Grammar.subparse($_, :rule("num"), :actions(Test-Grammar::Action));
+        parses-ok Test-Grammar,"num", $_, "$_ parses OK";
     }
-}, "Tests parsind - correct and incorrect";
+}, "Tests parses - correct and incorrect";
 
 done-testing;
