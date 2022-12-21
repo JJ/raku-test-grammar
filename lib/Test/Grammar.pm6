@@ -9,6 +9,24 @@ Test::Grammar - Test pieces of a grammar
 
     parses-ok Test-Grammar,"num", 3, "33 parses OK";
 
+    my $test-output = q:to/EOC/;
+    ok 1 - bailout parses OK
+    ok 2 - «bailout» extracts token
+    1..2
+    EOC
+
+    has-tokens Test-Grammar, "test", <nok num description>, $test-output,
+        "Complete tests";
+
+    token-is Test-Grammar,"bailout", "explanation",
+        "Bail out! FOOBAR",
+        "FOOBAR",
+        "«bailout» extracts token";
+
+    for <foo bar b3> {
+        parses-nok Test-Grammar,"num", $_, "$_ not parsed";
+    }
+
 =head1 DESCRIPTION
 This module is intended as a white-box test for grammars
 
