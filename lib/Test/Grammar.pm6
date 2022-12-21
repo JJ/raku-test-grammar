@@ -13,7 +13,6 @@ This module is intended as a white-box test for grammars
 =end pod
 
 use Test;
-use MONKEY-SEE-NO-EVAL;
 
 unit module Test::Grammar;
 
