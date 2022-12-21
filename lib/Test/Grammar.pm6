@@ -73,4 +73,13 @@ sub has-tokens( Grammar $grammar,
     cmp-ok [$parsed.keys], "⊇", @tokens, $message;
 }
 
+sub parses-to( Grammar $grammar,
+                $token-or-rule,
+                Str $str,
+                Str $parsed,
+                $message = "👍" ) is export {
+
+    my $match = $grammar.subparse($str, :rule($token-or-rule));
+    is ~$match, $parsed, $message;
+}
 
