@@ -39,6 +39,14 @@ After parsing a token/rule/regex in a grammar, the resulting match includes
 those
 sub-matches (also called, confusingly enough, tokens).
 
+=head2 sub parses-to( Grammar $grammar,
+                $token-or-rule,
+                Str $str,
+                $message = "👍" )
+
+String is parsed to itself by the rule. (I might merge this to the first one
+later, maybe)
+
 =end pod
 
 use Test;
@@ -76,10 +84,9 @@ sub has-tokens( Grammar $grammar,
 sub parses-to( Grammar $grammar,
                 $token-or-rule,
                 Str $str,
-                Str $parsed,
                 $message = "👍" ) is export {
 
     my $match = $grammar.subparse($str, :rule($token-or-rule));
-    is ~$match, $parsed, $message;
+    is ~$match, $str, $message;
 }
 
