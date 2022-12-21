@@ -25,7 +25,7 @@ returning something, without really worrying about what it actually returns.
 =head2 sub parses-nok( Grammar $grammar,
                $token-or-rule,
                Str $str,
-               $message = " $str" )
+               $message = "👎 $str" )
 
 Checks that it does not parse the handled string
 
@@ -57,7 +57,7 @@ sub parses-ok( Grammar $grammar,
 sub parses-nok( Grammar $grammar,
                $token-or-rule,
                Str $str,
-               $message = "👍" ) is export {
+               $message = "👎 $str" ) is export {
 
     nok $grammar.subparse($str, :rule($token-or-rule)), $message;
 

@@ -25,6 +25,7 @@ regex description {
 token bailout {
     'Bail out!' [ <.sp> $<explanation>=[\N*] ]?
 }
+
 token version {
     :i 'TAP version ' <version=.num>
 }
