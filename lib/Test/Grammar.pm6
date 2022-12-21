@@ -7,8 +7,37 @@ Test::Grammar - Test pieces of a grammar
 
     use Test::Grammar;
 
+    parses-ok Test-Grammar,"num", 3, "33 parses OK";
+
 =head1 DESCRIPTION
 This module is intended as a white-box test for grammars
+
+=head1 Methods
+
+=head2 sub parses-ok( Grammar $grammar,
+               $token-or-rule,
+               Str $str,
+               $message = "👍" )
+
+Checks that the grammar rule, contained in a strings, parses the string,
+returning something, without really worrying about what it actually returns.
+
+=head2 sub parses-nok( Grammar $grammar,
+               $token-or-rule,
+               Str $str,
+               $message = " $str" )
+
+Checks that it does not parse the handled string
+
+=head2 sub has-tokens( Grammar $grammar,
+                $token-or-rule,
+                @tokens,
+                Str $str,
+                $message = "👍" ) is export {
+
+After parsing a token/rule/regex in a grammar, the resulting match includes
+those
+sub-matches (also called, confusingly enough, tokens).
 
 =end pod
 
@@ -24,3 +53,24 @@ sub parses-ok( Grammar $grammar,
     ok $grammar.subparse($str, :rule($token-or-rule)), $message;
 
 }
+
+sub parses-nok( Grammar $grammar,
+               $token-or-rule,
+               Str $str,
+               $message = "👍" ) is export {
+
+    nok $grammar.subparse($str, :rule($token-or-rule)), $message;
+
+}
+
+sub has-tokens( Grammar $grammar,
+                $token-or-rule,
+                @tokens,
+                Str $str,
+                $message = "👍" ) is export {
+
+    my $parsed = $grammar.subparse($str, :rule($token-or-rule));
+    cmp-ok [$parsed.keys], "⊇", @tokens, $message;
+}
+
+

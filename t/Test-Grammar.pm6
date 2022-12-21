@@ -14,6 +14,8 @@ token test {
     <.sp>*
 }
 
+token sp { <[\s] - [\n]> }
+
 token num { <[0..9]>+ }
 
 regex description {
