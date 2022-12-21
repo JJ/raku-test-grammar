@@ -1,4 +1,4 @@
-# Test::Grammar for Raku
+# Test::Grammar for Raku [![Test in a Raku container - template](https://github.com/JJ/raku-test-grammar/actions/workflows/test.yaml/badge.svg)](https://github.com/JJ/raku-test-grammar/actions/workflows/test.yaml)
 
 Unit testing for grammars. Because testing is important.
 
