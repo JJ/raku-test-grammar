@@ -47,6 +47,15 @@ sub-matches (also called, confusingly enough, tokens).
 String is parsed to itself by the rule. (I might merge this to the first one
 later, maybe)
 
+=head2 sub token-is( Grammar $grammar,
+              $token-or-rule,
+              $token,
+              Str $str,
+              Str $token-str,
+              $message = "👍" )
+
+Checks if an internal subtoken extracts the value correctly
+
 =end pod
 
 use Test;
@@ -79,6 +88,17 @@ sub has-tokens( Grammar $grammar,
 
     my $parsed = $grammar.subparse($str, :rule($token-or-rule));
     cmp-ok [$parsed.keys], "⊇", @tokens, $message;
+}
+
+sub token-is( Grammar $grammar,
+              $token-or-rule,
+              $token,
+              Str $str,
+              Str $token-str,
+              $message = "👍" ) is export {
+
+    my $parsed = $grammar.subparse($str, :rule($token-or-rule));
+    is $parsed{$token}, $token-str, $message;
 }
 
 sub parses-to( Grammar $grammar,
